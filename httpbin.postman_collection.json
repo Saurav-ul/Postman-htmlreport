@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "a2f09484-5665-421f-ad3e-d3bb96a69fa5",
+		"name": "httpbin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Httpbin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/get?param1=1&param2=2",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "param1",
+							"value": "1"
+						},
+						{
+							"key": "param2",
+							"value": "2"
+						}
+					]
+				},
+				"description": "https://httpbin.org/get?param1=1&param2=2"
+			},
+			"response": []
+		},
+		{
+			"name": "Assertions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b893c76b-2d2d-4919-ba69-998fd2067e06",
+						"exec": [
+							"let jdata= pm.response.json();\r",
+							"let a=jdata.filters[2];\r",
+							"\r",
+							"pm.test(\"verify the isallowed from name\", function(){\r",
+							"    pm.expect(a.name).to.eql(\"MANUFACTURER\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://www.mocky.io/v2/5ab350d62f00005a00ca3663",
+					"protocol": "http",
+					"host": [
+						"www",
+						"mocky",
+						"io"
+					],
+					"path": [
+						"v2",
+						"5ab350d62f00005a00ca3663"
+					],
+					"query": [
+						{
+							"key": "param1",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "param2",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				},
+				"description": "https://httpbin.org/get?param1=1&param2=2"
+			},
+			"response": []
+		},
+		{
+			"name": "UUID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "477f99f9-6349-483c-b551-65770bae2e06",
+						"exec": [
+							"let response=pm.response.json();\r",
+							"pm.globals.set(\"uuid\", response.uuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/uuid",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"uuid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST httpbin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "946fa671-73de-4917-b57a-90265598884e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Saurav\",\r\n    \"email\" : \"Saurav.kum39@gmail.com\",\r\n    \"id\" : \"{{uuid}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://httpbin.org/post",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"post"
+					]
+				},
+				"description": "https://httpbin.org/post"
+			},
+			"response": []
+		},
+		{
+			"name": "Assignment1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b41085e6-4187-43e3-b177-e41e32568dc9",
+						"exec": [
+							"pm.test(\"Your test name\", function(){\r",
+							"    pm.expect(100).to.eql(100);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "My custom Agent",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.nytimes.com/svc/books/v3/lists.json?api-key=Lab2ALVwuvJClf5pmnML7utUkHRSqtCI&list=hardcover-nonfiction&rank=3&published-date=2020-07-20&rank-last-week=5",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nytimes",
+						"com"
+					],
+					"path": [
+						"svc",
+						"books",
+						"v3",
+						"lists.json"
+					],
+					"query": [
+						{
+							"key": "api-key",
+							"value": "Lab2ALVwuvJClf5pmnML7utUkHRSqtCI"
+						},
+						{
+							"key": "list",
+							"value": "hardcover-nonfiction"
+						},
+						{
+							"key": "rank",
+							"value": "3"
+						},
+						{
+							"key": "published-date",
+							"value": "2020-07-20"
+						},
+						{
+							"key": "rank-last-week",
+							"value": "5"
+						}
+					]
+				},
+				"description": "https://api.nytimes.com/svc/books/v3/lists.json?api-key=Lab2ALVwuvJClf5pmnML7utUkHRSqtCI&list=hardcover-nonfiction&rank=2&published-date=2020-07-19&rank-last-week=3"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
